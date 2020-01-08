@@ -1,22 +1,32 @@
 import React, {FunctionComponent} from 'react'
-import {ScrollView, Text} from 'react-native'
-import {useFetch} from 'hooks/useFetch'
-import {IPerson, peopleURL} from 'services/swapi'
+import {ScrollView, View} from 'react-native'
+import {IPerson} from 'services/swapi'
+import {styles} from 'components/people/People.style'
+import {Loading} from 'components/loading/Loading'
 import {Person} from 'components/people/Person'
 
-interface IProps {}
+interface IProps {
+  data: [IPerson] | []
+  loading: boolean
+}
 
-export const People: FunctionComponent<IProps> = ({}): JSX.Element => {
-  const {data, loading} = useFetch(peopleURL)
+export const People: FunctionComponent<IProps> = ({
+  data,
+  loading,
+}): JSX.Element => {
   return (
-    <ScrollView>
-      {loading ? (
-        <Text>loading...</Text>
-      ) : (
-        (data as Array<IPerson>).map(person => (
-          <Person key={person.name} person={person} />
-        ))
-      )}
-    </ScrollView>
+    <>
+      <View style={styles.people}>
+        <ScrollView>
+          {loading ? (
+            <Loading />
+          ) : (
+            (data as Array<IPerson>).map(person => (
+              <Person key={person.name} person={person} />
+            ))
+          )}
+        </ScrollView>
+      </View>
+    </>
   )
 }
