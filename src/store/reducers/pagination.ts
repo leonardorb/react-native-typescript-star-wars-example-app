@@ -11,8 +11,20 @@ interface IPaginationNextAction {
 
 type IPaginationActions = IPaginationPreviousAction | IPaginationNextAction
 
+export function previousPageAction() {
+  return {
+    type: PREVIOUS,
+  }
+}
+
+export function nextPageAction() {
+  return {
+    type: NEXT,
+  }
+}
+
 const initialState = {
-  current_page: 0,
+  current_page: 1,
 }
 
 export default function paginationReducer(

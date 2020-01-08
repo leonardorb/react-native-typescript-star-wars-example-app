@@ -2,7 +2,7 @@ import {combineReducers} from 'redux'
 import paginationReducer from 'store/reducers/pagination'
 
 const rootReducer = combineReducers({
-  paginationReducer,
+  pagination: paginationReducer,
 })
 
 export default rootReducer
