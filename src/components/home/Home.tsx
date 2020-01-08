@@ -1,7 +1,9 @@
 import React, {FunctionComponent} from 'react'
 import {View} from 'react-native'
+import {useSelector} from 'react-redux'
 import {useFetch} from 'hooks/useFetch'
 import {peopleURL} from 'services/swapi'
+import {IPaginationState} from 'store/reducers/pagination'
 import {styles} from 'components/home/Home.style'
 import {Header} from 'components/header/Header'
 import {People} from 'components/people/People'
@@ -12,7 +14,10 @@ interface NavigationComponent extends FunctionComponent {
 }
 
 export const Home: NavigationComponent = ({}): JSX.Element => {
-  const {count, data, loading} = useFetch(peopleURL)
+  const {current_page} = useSelector<any, IPaginationState>(
+    state => state.pagination,
+  )
+  const {count, data, loading} = useFetch(peopleURL(current_page))
 
   return (
     <>

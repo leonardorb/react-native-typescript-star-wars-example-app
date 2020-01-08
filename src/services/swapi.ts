@@ -1,5 +1,5 @@
 const baseURL: string = 'https://swapi.co/api'
-export const peopleURL: string = `${baseURL}/people/`
+export const peopleURL = (page: number) => `${baseURL}/people/?page=${page}`
 
 export interface IPerson {
   birth_year: string
